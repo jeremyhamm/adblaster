@@ -19,7 +19,7 @@ services:
       - "5432:5432"
     restart: always
     environment:
-      POSTGRES_DB: adblaster
+      POSTGRES_DB: domains
       POSTGRES_USER: adblaster
       POSTGRES_PASSWORD: nX^M3^eLY%DG#JePc6nd
 networks:
