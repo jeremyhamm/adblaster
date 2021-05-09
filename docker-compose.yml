@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    volumes:
+      - ./app:/app
+      - /app/node_modules/
+    ports:
+      - "8080:8080"
+  db:
+    container_name: db
+    image: postgres:latest
+    volumes:
+    - ./db/seeds/create.sql:/docker-entrypoint-initdb.d/create.sql
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: adblaster
+      POSTGRES_USER: adblaster
+      POSTGRES_PASSWORD: nX^M3^eLY%DG#JePc6nd
+networks:
+  adblaster:
+    name: adblaster

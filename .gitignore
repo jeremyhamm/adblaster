@@ -1,5 +1,4 @@
-# Object file
-*.o
+*.code-workspace
 
-# Ada Library Information
-*.ali
+# Directories
+misc
