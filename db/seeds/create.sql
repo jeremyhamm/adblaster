@@ -1,8 +1,12 @@
--- Create DB
-CREATE DATABASE adblaster
+/*
+Add extensions
+*/
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- Create table for domains
-CREATE TABLE domains (
+/*
+Create table for domains
+*/
+CREATE TABLE IF NOT EXISTS domains (
   id uuid DEFAULT uuid_generate_v4 (),
   name VARCHAR(255) NOT NULL,
   protocol VARCHAR(6) NULL,
