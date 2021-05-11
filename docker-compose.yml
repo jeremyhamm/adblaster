@@ -4,12 +4,13 @@ services:
     container_name: app
     build:
       context: .
-      dockerfile: ./app/Dockerfile
+      dockerfile: ./app/docker/Dockerfile
     volumes:
       - ./app:/app
       - /app/node_modules/
-    ports:
-      - "8080:8080"
+    depends_on:
+      - db
+    command: ["./app/docker/wait-for-it.sh", "db:5432", "--", "npm", "run", "start"]
   db:
     container_name: db
     image: postgres:latest

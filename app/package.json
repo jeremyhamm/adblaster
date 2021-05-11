@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/jeremyhamm/adblaster/issues"
   },
-  "homepage": "https://github.com/jeremyhamm/adblaster#readme"
+  "homepage": "https://github.com/jeremyhamm/adblaster#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^9.0.2",
+    "pg": "^8.6.0"
+  }
 }

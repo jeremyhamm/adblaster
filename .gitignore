@@ -1,4 +1,5 @@
 *.code-workspace
 
 # Directories
+node_modules
 misc
