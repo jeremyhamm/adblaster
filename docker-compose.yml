@@ -10,7 +10,7 @@ services:
       - /app/node_modules/
     depends_on:
       - db
-    command: ["./app/docker/wait-for-it.sh", "db:5432", "--", "npm", "run", "start"]
+    command: ["/app/docker/wait-for-it.sh", "db:5432", "--", "npm", "run", "start"]
   db:
     container_name: db
     image: postgres:latest

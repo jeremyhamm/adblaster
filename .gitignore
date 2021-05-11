@@ -1,4 +1,5 @@
 *.code-workspace
+*.env
 
 # Directories
 node_modules

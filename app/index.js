@@ -1,10 +1,9 @@
 require('dotenv').config();
 const client = require('./middleware/database');
 
-const testQuery = async () => {
+const getDomains = async () => {
   const res = await client.query('SELECT * from domains');
-  console.log(res);
+  console.log(res.rows);
   await client.end();
 };
-testQuery();
 
