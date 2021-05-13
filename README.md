@@ -1,2 +1,2 @@
-# adblaster
-Complete list of all sources to block advertising from your life
+# Adblaster
+Crowd sourced list of domains to block advertising from your life
