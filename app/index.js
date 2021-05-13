@@ -12,7 +12,7 @@ const filterList = (list) => {
   return records.filter((word) => {
     return !word.includes('#');
   });
-}
+};
 
 /**
  * Parse elements of adlist domain
@@ -34,6 +34,13 @@ const parseDomain = (validDomains) => {
     }
   }
   return domainArr;
+};
+
+const saveDomain = async (domain) => {
+  console.log(`Logging Domain: ${domain.address}`);
+  const text = 'INSERT INTO domains (name, ip, host, category, owner, validated, created_date) VALUES($1, $2) RETURNING *';
+  const values = ['KADhosts.txt', domain.ip, domain.address, 'suspicious', 'https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt', true, new Date().toString()];
+  await client.query(text, values);
 }
 
 const readList = (url) => {
@@ -41,7 +48,7 @@ const readList = (url) => {
   .then(response => {
     const filteredDomains = filterList(response.data);
     const domainObjects = parseDomain(filteredDomains);
-    console.log(domainObjects);
+    await saveDomain(domainObjects);
   });
 }
 readList('https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt');
