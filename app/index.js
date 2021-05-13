@@ -36,26 +36,32 @@ const parseDomain = (validDomains) => {
   return domainArr;
 };
 
+/**
+ * Save all domains from list
+ * @param {object} domain
+ * @return {void}
+ */
 const saveDomain = async (domain) => {
-  console.log(`Logging Domain: ${domain.address}`);
-  const text = 'INSERT INTO domains (name, ip, host, category, owner, validated, created_date) VALUES($1, $2) RETURNING *';
-  const values = ['KADhosts.txt', domain.ip, domain.address, 'suspicious', 'https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt', true, new Date().toString()];
-  await client.query(text, values);
+  for (const record of domain) {
+    console.log(`Logging Domain: ${record.address}`);
+    const text = 'INSERT INTO domains (name, ip, host, category, owner, validated, created_date) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+    const values = ['KADhosts.txt', record.ip, record.address, 'suspicious', 'https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt', true, new Date(Date.now()).toISOString()];
+    await client.query(text, values);
+  }
 }
 
+/**
+ * Read list of domains from url
+ * @param {string} url
+ * @return {void}
+ */
 const readList = (url) => {
   axios.get(url)
-  .then(response => {
+  .then(async response => {
     const filteredDomains = filterList(response.data);
     const domainObjects = parseDomain(filteredDomains);
     await saveDomain(domainObjects);
   });
 }
 readList('https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt');
-
-// const getDomains = async () => {
-//   const res = await client.query('SELECT * from domains');
-//   console.log(res.rows);
-//   await client.end();
-// };
 
