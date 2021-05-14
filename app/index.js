@@ -44,12 +44,17 @@ const parseDomain = (validDomains) => {
 const saveDomain = async (domain) => {
   for (const record of domain) {
     console.log(`Logging Domain: ${record.address}`);
-    const text = 'INSERT INTO domains (name, ip, host, category, owner, validated, created_date, modified_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
+    const sql = `
+      INSERT INTO domains (name, ip, host, category, owner, validated, created_date, modified_date)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+      ON CONFLICT (host)
+      DO NOTHING
+    `;
     const date = new Date(Date.now()).toISOString();
     const values = ['KADhosts.txt', record.ip, record.address, 'suspicious', 'https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt', true, date, date];
-    await client.query(text, values);
+    await client.query(sql, values);
   }
-}
+};
 
 /**
  * Read list of domains from url
@@ -63,6 +68,6 @@ const readList = (url) => {
     const domainObjects = parseDomain(filteredDomains);
     await saveDomain(domainObjects);
   });
-}
+};
 readList('https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt');
 
