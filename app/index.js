@@ -47,7 +47,7 @@ const saveDomain = async (domain) => {
     const sql = `
       INSERT INTO domains (name, ip, host, category, owner, validated, created_date, modified_date)
       VALUES($1, $2, $3, $4, $5, $6, $7, $8)
-      ON CONFLICT (host)
+      ON CONFLICT ON CONSTRAINT unique_host
       DO NOTHING
     `;
     const date = new Date(Date.now()).toISOString();
