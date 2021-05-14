@@ -8,7 +8,7 @@ Create table for domains
 */
 CREATE TABLE IF NOT EXISTS domains (
   id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
-  name VARCHAR(255) UNIQUE NOT NULL,
+  name VARCHAR(255) NOT NULL,
   ip VARCHAR(15) NULL,
   host VARCHAR(255) NOT NULL, 
   category VARCHAR(50) NOT NULL,
