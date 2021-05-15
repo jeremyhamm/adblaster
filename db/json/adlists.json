@@ -5,5 +5,12 @@
     "https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt",
     "https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt",
     "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt"
-  ]
+  ],
+  "developer-dan": {
+    "ads": "https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt",
+    "facebook": "https://www.github.developerdan.com/hosts/lists/facebook-extended.txt",
+    "amp-hosts": "https://www.github.developerdan.com/hosts/lists/amp-hosts-extended.txt",
+    "junk": "https://www.github.developerdan.com/hosts/lists/hate-and-junk-extended.txt",
+    "aggressive-tracking": "https://www.github.developerdan.com/hosts/lists/tracking-aggressive-extended.txt"
+  }
 }
