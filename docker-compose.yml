@@ -1,16 +1,16 @@
 version: '3.9'
 services:
-  app:
-    container_name: app
+  process-app:
+    container_name: process-app
     build:
       context: .
-      dockerfile: ./app/docker/Dockerfile
+      dockerfile: ./process-app/docker/Dockerfile
     volumes:
-      - ./app:/app
-      - /app/node_modules/
+      - ./process-app:/process-app
+      - /process-app/node_modules/
     depends_on:
       - db
-    command: ["/app/docker/wait-for-it.sh", "db:5432", "--", "npm", "run", "start"]
+    command: ["/process-app/docker/wait-for-it.sh", "db:5432", "--", "npm", "run", "start"]
   db:
     container_name: db
     image: postgres:latest

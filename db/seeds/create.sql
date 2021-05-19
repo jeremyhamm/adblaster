@@ -4,6 +4,11 @@ Add extensions
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 /**
+Create DB
+*/
+CREATE DATABASE adblaster;
+
+/**
 Create table for domains
 */
 CREATE TABLE IF NOT EXISTS domains (

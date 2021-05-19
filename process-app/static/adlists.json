@@ -1,0 +1,28 @@
+{
+  "developer-dan": {
+    "url": "https://www.github.developerdan.com/hosts/",
+    "adlists": {
+      "ads": "https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt",
+      "facebook": "https://www.github.developerdan.com/hosts/lists/facebook-extended.txt",
+      "amp-hosts": "https://www.github.developerdan.com/hosts/lists/amp-hosts-extended.txt",
+      "junk": "https://www.github.developerdan.com/hosts/lists/hate-and-junk-extended.txt",
+      "aggressive-tracking": "https://www.github.developerdan.com/hosts/lists/tracking-aggressive-extended.txt"
+    }
+  },
+  "kad-hosts": {
+    "url": "https://github.com/PolishFiltersTeam/KADhosts",
+    "adlists": {
+      "kad-hosts": "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt"
+    }
+  },
+  "steven-black": {
+    "url": "https://github.com/StevenBlack/hosts",
+    "adlists": {
+      "adware": "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
+      "fake-news": "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews/hosts",
+      "gambling": "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling/hosts",
+      "porn": "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn/hosts",
+      "social-media": "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/social/hosts"
+    }
+  }
+}

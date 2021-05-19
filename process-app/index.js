@@ -1,6 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const client = require('./middleware/database');
+const fs = require('fs');
 
 /**
  * Format adlist text file into array of valid domains
@@ -15,11 +16,14 @@ const filterList = (list) => {
 };
 
 /**
- * Parse elements of adlist domain
- * @param {string} domain
+ * Process domain list in array of objects for saving in storage
+ * @param {array} validDomains
+ * @param {string} name
+ * @param {string} owner
+ * @param {string} category
  * @return {object}
  */
-const parseDomain = (validDomains) => {
+const processDomain = (validDomains, name, owner, category) => {
   let domainArr = [];          
   for (const domain of validDomains) {
     const ip = domain.match(new RegExp(/^\S*/));
@@ -28,7 +32,10 @@ const parseDomain = (validDomains) => {
       domainArr.push(
         {
           ip: ip[0],
-          address: address[0]
+          address: address[0],
+          name: name,
+          owner: owner,
+          category: category
         }
       )
     }
@@ -51,7 +58,7 @@ const saveDomain = async (domain) => {
       DO NOTHING
     `;
     const date = new Date(Date.now()).toISOString();
-    const values = ['KADhosts.txt', record.ip, record.address, 'suspicious', 'https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt', true, date, date];
+    const values = [record.name, record.ip, record.address, record.category, record.owner, true, date, date];
     await client.query(sql, values);
   }
 };
@@ -61,13 +68,25 @@ const saveDomain = async (domain) => {
  * @param {string} url
  * @return {void}
  */
-const readList = (url) => {
+const readList = (url, name, owner, category) => {
   axios.get(url)
   .then(async response => {
-    const filteredDomains = filterList(response.data);
-    const domainObjects = parseDomain(filteredDomains);
-    await saveDomain(domainObjects);
+    let domain = filterList(response.data);
+    domain = processDomain(domain, name, owner, category);
+    await saveDomain(domain);
   });
 };
-readList('https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt');
 
+/**
+ * Process adlists.json
+ */
+let adlistRaw = fs.readFileSync('./static/adlists.json');
+let jsonSources = JSON.parse(adlistRaw);
+for (const source in jsonSources) {
+  const name = source;
+  const owner = jsonSources[name].url;
+  const adlists = jsonSources[name].adlists;
+  for (const list in adlists) {
+    readList(adlists[list], name, owner, list);
+  }
+};
